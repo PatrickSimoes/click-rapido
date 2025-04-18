@@ -3,6 +3,18 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "clickup": {
+      "type": "library",
+      "root": "libs/clickup",
+      "entryFile": "index",
+      "sourceRoot": "libs/clickup/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/clickup/tsconfig.lib.json"
+      }
+    }
   }
 }
