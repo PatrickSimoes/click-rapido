@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:latest
+    restart: always
+    container_name: db_quick_click
+    environment:
+      - POSTGRES_DB=quick_click
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data-click:/var/lib/postgresql/data
+    networks:
+      - quick_click
+
+volumes:
+  db-data-click:
+
+
+networks:
+  quick_click: {}
