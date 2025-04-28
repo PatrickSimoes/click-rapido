@@ -1,4 +1,3 @@
-// src/clickups/clickup.service.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { CreateClickupDto } from './dto/create-clickup.dto';
 
