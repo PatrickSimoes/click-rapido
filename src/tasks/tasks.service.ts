@@ -1,26 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
+import { Injectable, Logger } from '@nestjs/common';
+import { ClickupService } from '@app/clickup';
 
 @Injectable()
 export class TasksService {
-  create(createTaskDto: CreateTaskDto) {
+  private logger = new Logger(TasksService.name);
+
+  constructor(private readonly clickupService: ClickupService) { }
+
+  createClickupTask(tasks: any) {
+    try {
+      for (const task of tasks) {
+
+        const { title, description, cycle, quantity, type } = task;
+
+        this.clickupService.createPersonalTask({
+          title,
+          description,
+          cycle,
+          quantity,
+          type,
+        });
+      }
+
+
+      return { success: 'Task created successfully' };
+    } catch (error) {
+      this.logger.error(`Error creating task: ${error}`);
+    }
     return 'This action adds a new task';
   }
 
   findAll() {
     return `This action returns all tasks`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
-  }
-
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} task`;
   }
 }
